@@ -25,9 +25,11 @@ namespace WebApp.Pages.OrderedItems
 
         public int FoodItemId { get; set; }
 
+        public int OrderId { get; set; }
+
         public FoodItem FoodItem { get; set; }
         
-        public IActionResult OnGet(int? id, int? personId)
+        public IActionResult OnGet(int? foodItemId, int? personId, int? orderId)
         {
             FoodItemSelectList = new SelectList(_context.FoodItems, 
                 nameof(FoodItem.FoodItemId), 
@@ -36,7 +38,7 @@ namespace WebApp.Pages.OrderedItems
             PersonSelectList = new SelectList(_context.Persons, 
                 nameof(Person.PersonId), 
                 nameof(Person.Name));
-            if (id == null)
+            if (foodItemId == null)
             {
                 return RedirectToPage("../Index");
             }
@@ -44,9 +46,17 @@ namespace WebApp.Pages.OrderedItems
             {
                 return RedirectToPage("../Index");
             }
+            if (orderId == null)
+            {
+                return RedirectToPage("../Index");
+            }
+            
             PersonId = personId.Value;
 
-            FoodItemId = id.Value;
+            FoodItemId = foodItemId.Value;
+
+            OrderId = orderId.Value;
+            
             FoodItem = _context.FoodItems.FirstOrDefault(x => x.FoodItemId == FoodItemId);
 
             return Page();
@@ -64,16 +74,17 @@ namespace WebApp.Pages.OrderedItems
                 return Page();
             }
             
-
+            
             _context.OrderedItems.Add(OrderedItem);
-            var foodItem = await _context.FoodItems.FirstOrDefaultAsync(x => x.FoodItemId == FoodItemId);
+            var foodItem = await _context.FoodItems.FirstOrDefaultAsync(x => x.FoodItemId == OrderedItem.FoodItemId);
             
             var person = await _context.Persons.FindAsync(OrderedItem.PersonId);
-            person.SumOfItems += foodItem.Price;
+            
+            person.SumOfItems += foodItem.Price * OrderedItem.Quantity; 
             _context.Persons.Update(person);
             
             var order = await _context.Orders.FindAsync(person.OrderId);
-            order.OrderTotal += foodItem.Price;
+            order.OrderTotal += foodItem.Price * OrderedItem.Quantity;
             _context.Orders.Update(order);
             
             await _context.SaveChangesAsync();

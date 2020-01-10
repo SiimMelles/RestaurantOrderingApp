@@ -5,40 +5,44 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Your order</h1>
 
 <div>
-    <h4>Order</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Order.OrderTotal)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Order.OrderTotal)
-        </dd>
-        <ul>
-            @{
-                if (Model.Order.Persons.Count >= 0)
+    <h4>Order total: @Html.DisplayFor(model => model.Order.OrderTotal)€</h4>
+    
+    @{
+            if (Model.Order.Persons.Count > 0)
                 {
-                    foreach (var person in Model.Order.Persons)
+                    <table class="table">
+                        <th>People ordering</th>
+                        <th>persons order total</th>
+                        <th></th>
+                        <th></th>
+                    @foreach (var person in Model.Order.Persons)
                     {
-                        <li>@person.Name - 
-                            <a asp-page="../OrderedItems/CreateFromList" asp-route-id="@person.PersonId">
-                                Add meal to order - 
-                            </a>
-                            <a asp-page="../Persons/Details" asp-route-id="@person.PersonId" asp-route-OrderId="@Model.Order.OrderId">
-                                View persons order
-                            </a>
-                        </li>
-                    }    
+                        <tr>
+                            <td>@person.Name</td>
+                            
+                            <td>@person.SumOfItems€</td>
+
+                            <td>
+                                <a asp-page="../OrderedItems/CreateFromList" asp-route-OrderId="@Model.Order.OrderId" asp-route-id="@person.PersonId">
+                                    Add meal to order
+                                </a>
+                            </td>
+                            <td>
+                                <a asp-page="../Persons/Details" asp-route-id="@person.PersonId" asp-route-OrderId="@Model.Order.OrderId">
+                                    View persons order
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </table>
                 }
-            }
-        </ul>
-    </dl>
+        }
+        <br>
 </div>
 <div>
-    <a asp-page="./../Persons/Create" asp-route-id="@Model.Order.OrderId">Add people to order</a> | 
-    <a asp-page="./Edit" asp-route-id="@Model.Order.OrderId">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+    <a class="btn btn-primary" asp-page="./../Persons/Create" asp-route-id="@Model.Order.OrderId">Add people to order</a> | 
+    <a class="btn btn-secondary" asp-page="./Index">Back to List</a>
 </div>

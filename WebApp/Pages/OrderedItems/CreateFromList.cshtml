@@ -1,21 +1,27 @@
 @page
 @model WebApp.Pages.OrderedItems.CreateFromList
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
+
+<h1>Restaurant menu</h1>
+<hr>
+<a style="margin-bottom: 20px" class="btn btn-primary" asp-page="../Orders/Details" asp-route-id="@Model.OrderId">Back to table order</a>
+<a style="margin-bottom: 20px" class="btn btn-primary" asp-page="../Persons/Details" asp-route-id="@Model.PersonId">Back to personal order</a>
+
 <form class="form-inline" method="get">
     <div class="form-group">
         <!-- Weird hack with value="" -->
-        <input asp-for="@Model.Search" class="form-control"/>
-        <input type="hidden" asp-for="@Model.PersonId" value="@Model.PersonId">
+        <input asp-for="@Model.Search"  value="@Model.Search" class="form-control"/>
+        <input type="hidden" asp-for="@Model.PersonId" value="@Model.PersonId">&nbsp;
+        <input type="hidden" asp-for="@Model.OrderId" value="@Model.OrderId">&nbsp;
+
     </div>
 
     <div class="form-group">
-        <input type="submit" value="Search" class="btn btn-primary"/>
+        <input type="submit" value="Search" class="btn btn-primary"/> &nbsp;
         <input type="submit" value="Reset" name="ToDoActionReset" class="btn btn-secondary"
                @(string.IsNullOrWhiteSpace(Model.Search) ? "disabled=\"disabled\"" : "")/>
     </div>
 </form>
+
 <table class="table">
     <thead>
     <tr>
@@ -50,7 +56,9 @@
                 @Html.DisplayFor(modelItem => item.FoodCategory!.CategoryName)
             </td>
             <td>
-                <a asp-page="./ConfirmAdding" asp-route-id="@item.FoodItemId" asp-route-personId="@Model.PersonId">Add to my order</a>
+                <a class="btn btn-primary" asp-page="./ConfirmAdding" 
+                   asp-route-foodItemid="@item.FoodItemId" asp-route-personId="@Model.PersonId"
+                   asp-route-orderId="@Model.OrderId">Add to my order</a>
             </td>
         </tr>
     }

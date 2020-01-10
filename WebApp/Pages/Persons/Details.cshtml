@@ -11,34 +11,52 @@
     <h4>Person</h4>
     <hr />
     <dl class="row">
-        <dt class="col-sm-2">
+        <dt class="col-sm-4">
             @Html.DisplayNameFor(model => model.Person.SumOfItems)
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Person.SumOfItems)
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Person.SumOfItems)€
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-4">
             @Html.DisplayNameFor(model => model.Person.Name)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-8">
             @Html.DisplayFor(model => model.Person.Name)
         </dd>
     </dl>
-     <h5>Orders:</h5>
-            @{
-                foreach (var orderedItem in Model.Person.OrderedItems)
+    @{
+    if (Model.Person.OrderedItems.Count > 0)
+        {
+            <h5>Orders:</h5>
+            <table class="table">
+                <th>Dish</th>
+                <th>Price</th>
+                <th>Special instructions</th>
+                <th></th>
+                @foreach (var orderedItem in Model.Person.OrderedItems)
                 {
-                    <ul>
-                        <li>
-                            @orderedItem.FoodItem.Name - @orderedItem.FoodItem.Price - instructions: @orderedItem.SpecialInstructions 
-                            <a asp-page="../OrderedItems/Delete" asp-route-id="@orderedItem.OrderedItemId">delete row</a>
-                        </li>
-                    </ul>
+                <tr>
+                    <td>
+                        @orderedItem.FoodItem.Name
+                    </td>
+                    <td>
+                        @(orderedItem.FoodItem.Price * orderedItem.Quantity)€
+                    </td>
+                    <td>
+                        @orderedItem.SpecialInstructions 
+                    </td>
+                    <td>
+                        <a asp-page="../OrderedItems/Delete" asp-route-id="@orderedItem.OrderedItemId">delete row</a>
+                    </td>
+                </tr>
                     
                 }
-            }
+            </table>
+        }
+    }
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Person.PersonId">Edit</a> |
+    <a asp-page="../OrderedItems/CreateFromList" asp-route-OrderId="@Model.Person.OrderId" 
+       asp-route-id="@Model.Person.PersonId">Add new order row</a> |
     <a asp-page="../Orders/Details" asp-route-id="@Model.Person.OrderId">Back to order</a>
 </div>

@@ -11,13 +11,9 @@
     <div class="col-md-4">
         <form method="post">
             
-            
             <h3>@Model.FoodItem.Name</h3>
             
-            <h4>@Model.FoodItem.Price</h4>
-            
-            @Model.PersonId
-            
+            <h4>Price: @Model.FoodItem.Price€</h4>
             
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -34,18 +30,19 @@
             <input asp-for="OrderedItem.FoodItemId" value="@Model.FoodItemId" class="form-control" type="hidden"/>
             
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary"/>
+                <input type="submit" value="Create" class="btn btn-success"/>
             </div>
         </form>
     </div>
 </div>
 
+
 <div>
-    <a asp-page="../Persons/Details" asp-route-id="@Model.PersonId">Back to individual order</a>
+    <a class="btn btn-secondary" asp-page="../OrderedItems/CreateFromList" asp-route-orderId="@Model.OrderId" 
+       asp-route-id="@Model.PersonId">Back to restaurant menu</a>
+    <a class="btn btn-primary" asp-page="../Orders/Details" asp-route-id="@Model.OrderId">Back to order</a>
 </div>
-<div>
-    <a asp-page="../OrderedItems/CreateFromList" asp-route-id="@Model.PersonId">Back to menu</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

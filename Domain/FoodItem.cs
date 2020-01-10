@@ -20,8 +20,11 @@ namespace Domain
         public string Ingredients { get; set; } = default!; // to allow searching for fooditem
 
         public ICollection<OrderedItem>? OrderedItems { get; set; }
-
+        
+        [Display(Name = "Food category")]
         public int FoodCategoryId { get; set; }
+        
+        [Display(Name = "Dish category")]
         public FoodCategory? FoodCategory { get; set; }
         
     }

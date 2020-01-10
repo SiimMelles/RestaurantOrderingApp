@@ -5,11 +5,11 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Orders</h1>
 
     <form method="post">
     <div class="form-group">
-        <input type="submit" value="Create" class="btn btn-primary" />
+        <input type="submit" value="Place new order" class="btn btn-primary" />
     </div>
     </form>
 <table class="table">
@@ -29,9 +29,8 @@
             </td>
             
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.OrderId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.OrderId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.OrderId">Delete</a>
+                <a asp-page="./Details" asp-route-id="@item.OrderId">View order</a> |
+                <a asp-page="./Delete" asp-route-id="@item.OrderId">Remove order</a>
             </td>
         </tr>
 }

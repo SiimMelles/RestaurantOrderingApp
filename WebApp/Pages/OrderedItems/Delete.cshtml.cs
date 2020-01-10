@@ -59,11 +59,11 @@ namespace WebApp.Pages.OrderedItems
                 var foodItem = await _context.FoodItems.FindAsync(OrderedItem.FoodItemId);
                 
                 var person = await _context.Persons.FindAsync(PersonId);
-                person.SumOfItems -= foodItem.Price;
+                person.SumOfItems -= foodItem.Price * OrderedItem.Quantity;
                 _context.Persons.Update(person);
                 
                 var order = await _context.Orders.FindAsync(person.OrderId);
-                order.OrderTotal -= foodItem.Price;
+                order.OrderTotal -= foodItem.Price * OrderedItem.Quantity;
                 _context.Orders.Update(order);
                 
                 _context.OrderedItems.Remove(OrderedItem);

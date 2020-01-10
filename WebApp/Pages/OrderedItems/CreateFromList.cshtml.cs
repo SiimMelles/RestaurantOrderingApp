@@ -18,23 +18,31 @@ namespace WebApp.Pages.OrderedItems
         
         public string Search { get; set; }
 
+        public string[] SearchConditions { get; set; } = {""};
+        
         public int PersonId { get; set; }
+        public int OrderId { get; set; }
+
         
         public IList<FoodItem> FoodItem { get;set; } = default!;
 
-        public async Task OnGetAsync(int? id, string search, string toDoActionReset)
+        public async Task OnGetAsync(int? id, int? orderId, string search, string toDoActionReset)
         {
             if (toDoActionReset == "Reset")
             {
-                Search = null;
+                Search = "";
             }
             else
             {
                 if (!string.IsNullOrWhiteSpace(search))
                 {
                     Search = search.ToLower().Trim();
+                    SearchConditions = Search.Split(",");
                 }
-
+            }
+            if (orderId != null)
+            {
+                OrderId = orderId.Value;
             }
 
             if (id != null)
@@ -46,17 +54,31 @@ namespace WebApp.Pages.OrderedItems
                 PersonId = PersonId;
             }
 
+            
             var foodQuery = _context.FoodItems
                 .Include(f => f.FoodCategory).AsQueryable();
 
-            if (!string.IsNullOrWhiteSpace(Search))
+            foreach (var searchCondition in SearchConditions)
             {
-                foodQuery = foodQuery.Where(a => a.Ingredients.ToLower().Contains(Search) || 
-                                                 a.Name.ToLower().Contains(Search));
+                if (!string.IsNullOrWhiteSpace(searchCondition))
+                {
+                    if (searchCondition.StartsWith("!"))
+                    {
+                        foodQuery = foodQuery.Where(a => !(a.Ingredients.ToLower().Contains(searchCondition.Substring(1)) && 
+                                                         a.Name.ToLower().Contains(searchCondition.Substring(1))));
+                    }
+                    else
+                    {
+                        foodQuery = foodQuery.Where(a => a.Ingredients.ToLower().Contains(searchCondition) || 
+                                                         a.Name.ToLower().Contains(searchCondition));    
+                    }
+                }    
             }
+            
             
             FoodItem = await foodQuery.ToListAsync();
             
         }
+
     }
 }

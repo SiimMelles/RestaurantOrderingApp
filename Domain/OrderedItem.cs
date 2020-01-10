@@ -8,10 +8,10 @@ namespace Domain
         public int OrderedItemId { get; set; }
 
         public int Quantity { get; set; } // Quantity of foodItems
-        
+
         [MaxLength(1024)]
         [Display(Name = "Special instructions", Prompt = "Enter special instructions here...")]
-        public string SpecialInstructions { get; set; } = default!;
+        public string SpecialInstructions { get; set; } = "";
         
         public int FoodItemId { get; set; } 
         public FoodItem? FoodItem { get; set; } // The meal/food in said  'product'
