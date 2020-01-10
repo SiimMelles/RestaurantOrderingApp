@@ -1,0 +1,11 @@
+/Users/siimmelles/CSharp2019/icd0008-2019f/Exam/DAL/bin/Debug/netstandard2.1/DAL.deps.json
+/Users/siimmelles/CSharp2019/icd0008-2019f/Exam/DAL/bin/Debug/netstandard2.1/DAL.dll
+/Users/siimmelles/CSharp2019/icd0008-2019f/Exam/DAL/bin/Debug/netstandard2.1/DAL.pdb
+/Users/siimmelles/CSharp2019/icd0008-2019f/Exam/DAL/bin/Debug/netstandard2.1/Domain.dll
+/Users/siimmelles/CSharp2019/icd0008-2019f/Exam/DAL/bin/Debug/netstandard2.1/Domain.pdb
+/Users/siimmelles/CSharp2019/icd0008-2019f/Exam/DAL/obj/Debug/netstandard2.1/DAL.csprojAssemblyReference.cache
+/Users/siimmelles/CSharp2019/icd0008-2019f/Exam/DAL/obj/Debug/netstandard2.1/DAL.AssemblyInfoInputs.cache
+/Users/siimmelles/CSharp2019/icd0008-2019f/Exam/DAL/obj/Debug/netstandard2.1/DAL.AssemblyInfo.cs
+/Users/siimmelles/CSharp2019/icd0008-2019f/Exam/DAL/obj/Debug/netstandard2.1/DAL.csproj.CopyComplete
+/Users/siimmelles/CSharp2019/icd0008-2019f/Exam/DAL/obj/Debug/netstandard2.1/DAL.dll
+/Users/siimmelles/CSharp2019/icd0008-2019f/Exam/DAL/obj/Debug/netstandard2.1/DAL.pdb

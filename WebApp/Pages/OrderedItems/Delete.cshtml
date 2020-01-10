@@ -1,0 +1,46 @@
+@page
+@model WebApp.Pages.OrderedItems.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>OrderedItem</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrderedItem.Quantity)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrderedItem.Quantity)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrderedItem.SpecialInstructions)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrderedItem.SpecialInstructions)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrderedItem.FoodItem)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrderedItem.FoodItem!.Ingredients)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrderedItem.Person)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrderedItem!.Person.Name)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="OrderedItem.OrderedItemId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

@@ -1,0 +1,52 @@
+@page
+@model WebApp.Pages.OrderedItems.ConfirmAdding
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h4>Confirm adding dish to order</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            
+            
+            <h3>@Model.FoodItem.Name</h3>
+            
+            <h4>@Model.FoodItem.Price</h4>
+            
+            @Model.PersonId
+            
+            
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="OrderedItem.Quantity" class="control-label"></label>
+                <input asp-for="OrderedItem.Quantity" class="form-control"/>
+                <span asp-validation-for="OrderedItem.Quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderedItem.SpecialInstructions" class="control-label"></label>
+                <input asp-for="OrderedItem.SpecialInstructions" class="form-control"/>
+                <span asp-validation-for="OrderedItem.SpecialInstructions" class="text-danger"></span>
+            </div>
+            <input asp-for="OrderedItem.PersonId" value="@Model.PersonId" class="form-control" type="hidden"/>
+            <input asp-for="OrderedItem.FoodItemId" value="@Model.FoodItemId" class="form-control" type="hidden"/>
+            
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="../Persons/Details" asp-route-id="@Model.PersonId">Back to individual order</a>
+</div>
+<div>
+    <a asp-page="../OrderedItems/CreateFromList" asp-route-id="@Model.PersonId">Back to menu</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

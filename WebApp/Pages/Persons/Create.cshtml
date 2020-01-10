@@ -1,0 +1,42 @@
+@page
+@model WebApp.Pages.Persons.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Add people to you order</h1>
+
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <!---
+            <div class="form-group">
+                <label asp-for="Person.SumOfItems" class="control-label"></label>
+                <input asp-for="Person.SumOfItems" class="form-control" />
+                <span asp-validation-for="Person.SumOfItems" class="text-danger"></span>
+            </div>--->
+            <div class="form-group">
+                <label asp-for="Person.Name" class="control-label"></label>
+                <input asp-for="Person.Name" class="form-control" />
+                <span asp-validation-for="Person.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Person.OrderId" value="@Model.OrderId" class="form-control" type="hidden"/>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./../Orders/Details" asp-route-id="@Model.OrderId">Back to your order</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

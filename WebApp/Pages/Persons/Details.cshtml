@@ -1,0 +1,44 @@
+@page
+@model WebApp.Pages.Persons.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Person</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Person.SumOfItems)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Person.SumOfItems)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Person.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Person.Name)
+        </dd>
+    </dl>
+     <h5>Orders:</h5>
+            @{
+                foreach (var orderedItem in Model.Person.OrderedItems)
+                {
+                    <ul>
+                        <li>
+                            @orderedItem.FoodItem.Name - @orderedItem.FoodItem.Price - instructions: @orderedItem.SpecialInstructions 
+                            <a asp-page="../OrderedItems/Delete" asp-route-id="@orderedItem.OrderedItemId">delete row</a>
+                        </li>
+                    </ul>
+                    
+                }
+            }
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Person.PersonId">Edit</a> |
+    <a asp-page="../Orders/Details" asp-route-id="@Model.Person.OrderId">Back to order</a>
+</div>

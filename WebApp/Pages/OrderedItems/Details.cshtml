@@ -1,0 +1,43 @@
+@page
+@model WebApp.Pages.OrderedItems.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>OrderedItem</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrderedItem.Quantity)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrderedItem.Quantity)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrderedItem.SpecialInstructions)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrderedItem.SpecialInstructions)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrderedItem.FoodItem)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrderedItem.FoodItem!.Ingredients)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrderedItem.Person)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrderedItem.Person.Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.OrderedItem.OrderedItemId">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

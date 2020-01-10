@@ -1,0 +1,54 @@
+@page
+@model WebApp.Pages.OrderedItems.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderedItem[0].Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderedItem[0].SpecialInstructions)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderedItem[0].FoodItem)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderedItem[0].Person)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.OrderedItem) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SpecialInstructions)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FoodItem.Ingredients)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Person.Name)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.OrderedItemId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.OrderedItemId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.OrderedItemId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

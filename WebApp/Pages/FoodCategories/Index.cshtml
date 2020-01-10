@@ -1,0 +1,36 @@
+@page
+@model WebApp.Pages.FoodCategories.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FoodCategory[0].CategoryName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.FoodCategory) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.FoodCategoryId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.FoodCategoryId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.FoodCategoryId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
